@@ -42,10 +42,6 @@ const passwordReducer = (state, action) => {
 };
 
 const Login = (props) => {
-  // const [enteredEmail, setEnteredEmail] = useState("");
-  // const [emailIsValid, setEmailIsValid] = useState();
-  // const [enteredPassword, setEnteredPassword] = useState("");
-  // const [passwordIsValid, setPasswordIsValid] = useState();
   const [formIsValid, setFormIsValid] = useState(false);
 
   const [emailState, dispatchEmail] = useReducer(emailReducer, {
@@ -57,14 +53,6 @@ const Login = (props) => {
     value: "",
     isValid: false,
   });
-
-  useEffect(() => {
-    console.log("EFFECT RUNNING");
-
-    return () => {
-      console.log("EFFECT CLEANUP");
-    };
-  }, []);
 
   // useEffect(() => {
   //   const identifier = setTimeout(() => {
