@@ -5,6 +5,16 @@ import classes from "./Login.module.css";
 import Button from "../UI/Button/Button";
 
 const emailReducer = (state, action) => {
+  // check for action type, that is set, and update the state value with user inpur
+  if (action.type === "USER_INPUT") {
+    return { value: action.value, isValid: action.value.includes("@") };
+  }
+
+  // check for action type, and use state snapshot
+  if (action.type === "INPUT_BLUR") {
+    return { value: state.value, isValid: state.value.includes("@") };
+  }
+
   return {
     value: "",
     isValid: false,
@@ -46,7 +56,12 @@ const Login = (props) => {
   // }, [enteredEmail, enteredPassword]);
 
   const emailChangeHandler = (event) => {
-    setEnteredEmail(event.target.value);
+    // we can pass anything we like into the dispatchEmail, but a good standard is to use an object
+    // with an action type we can check.
+    dispatchEmail({
+      type: "USER_INPUT",
+      value: event.target.value,
+    });
 
     setFormIsValid(
       event.target.value.includes("@") && enteredPassword.trim().length > 6
@@ -60,7 +75,10 @@ const Login = (props) => {
   };
 
   const validateEmailHandler = () => {
-    setEmailIsValid(emailState.isValid);
+    // type is set to 'INPUT_BLUR' because no new data is being added/updated
+    dispatchEmail({
+      type: "INPUT_BLUR",
+    });
   };
 
   const validatePasswordHandler = () => {
