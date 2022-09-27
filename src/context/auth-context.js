@@ -8,9 +8,11 @@ const AuthContext = React.createContext({
   onLogin: (email, password) => {},
 });
 
+// Custom Context provider to handle login/logout functionality
 export const AuthContextProvider = (props) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  // check to see if local storage has login key/value
   useEffect(() => {
     const storedUserLoggedInInformation = localStorage.getItem("isLoggedIn");
 
@@ -19,11 +21,13 @@ export const AuthContextProvider = (props) => {
     }
   }, []);
 
+  // set local storage item and update state if logged in
   const loginHandler = (email, password) => {
     localStorage.setItem("isLoggedIn", "1");
     setIsLoggedIn(true);
   };
 
+  // remove local storage item and update state if logged out
   const logoutHandler = () => {
     localStorage.removeItem("isLoggedIn");
     setIsLoggedIn(false);
