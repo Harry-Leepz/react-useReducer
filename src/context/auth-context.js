@@ -4,6 +4,7 @@ import React from "react";
 // createContext returns an object that holds a component
 const AuthContext = React.createContext({
   isLoggedIn: false,
+  onLogout: () => {},
 });
 
 // Once exported this context object needs to provide and then consumed.
